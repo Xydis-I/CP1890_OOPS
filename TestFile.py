@@ -1,4 +1,3 @@
-print("Test")
 # F-Strings with format specifications
 fp_number = 12345.6789
 fp_number2 = 234512345.6789
