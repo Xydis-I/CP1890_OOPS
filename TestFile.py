@@ -11,6 +11,7 @@ dc_number = 6789
 #                       % - percentage
 #                       e - scientific notation
 
+# Base
 print(f"{fp_number:.2f}")
 print("{:.2f}".format(fp_number))
 
