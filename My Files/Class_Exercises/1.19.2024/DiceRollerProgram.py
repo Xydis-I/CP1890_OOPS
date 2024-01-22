@@ -12,9 +12,9 @@ def get_int(message: str) -> int:
 def main():
     print("The Dice Roller program\n")
 
-    dieCount = get_int("Enter the number of dice to roll: ")
+    die_count = get_int("Enter the number of dice to roll: ")
     dice = Dice()
-    dice.addDice(dieCount)
+    dice.addDice(die_count)
 
     while True:
         dice.rollAll()
