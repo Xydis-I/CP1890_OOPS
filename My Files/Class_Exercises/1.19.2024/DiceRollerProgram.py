@@ -18,7 +18,7 @@ def main():
 
     while True:
         dice.rollAll()
-        values = [d.value for d in dice.die_list]
+        values = [d.getValue() for d in dice.getDieList()]
         print("YOUR ROLL:", *values)
         if input("\nRoll again? (y/n): ").lower() != "y":
             break
