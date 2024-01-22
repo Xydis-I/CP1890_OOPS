@@ -3,15 +3,15 @@ from Die import Die
 
 class Dice:
     def __init__(self):
-        self.__die_list = []
+        self.__list = []
 
     def addDice(self, die: int):
         for d in range(0, die):
-            self.__die_list.append(Die())
+            self.__list.append(Die())
 
     def rollAll(self):
-        for die in self.__die_list:
+        for die in self.__list:
             die.roll()
 
     def getDieList(self):
-        return self.__die_list
+        return self.__list
