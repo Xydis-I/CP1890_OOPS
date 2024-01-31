@@ -1,5 +1,5 @@
 from Player import Player
-import datetime
+from datetime import datetime, timedelta
 
 
 def main():
@@ -19,9 +19,9 @@ def main():
 def main_menu():
     print('=' * 64)
     print(f"{'Baseball team Manager':>40}\n")
-    currentDate = datetime.datetime.now().date()
+    currentDate = datetime.now().date()
     print("CURRENT DATE:\t", currentDate)
-    gameDate = datetime.datetime.fromisoformat(input("GAME DATE:\t\t ")).date()
+    gameDate = datetime.fromisoformat(input("GAME DATE:\t\t ")).date()
     print("DAYS UNTIL GAME:", (gameDate - currentDate).days)
     print("\n"
           "1 - Display lineup\n"
