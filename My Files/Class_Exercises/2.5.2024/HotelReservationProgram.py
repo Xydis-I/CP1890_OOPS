@@ -1,4 +1,6 @@
+import _locale
 from datetime import datetime
+import locale
 
 
 def main():
@@ -15,12 +17,13 @@ def main():
             season = ""
             rate = 85
 
+        locale.setlocale(locale.LC_ALL, 'en-ca')
         print(f"\n"
               f"Arrival date:   {arrival:%B %d, %Y}\n"
               f"Departure date: {departure:%B %d, %Y}\n"
-              f"Nightly rate:   ${rate:.2f} {season}\n"
+              f"Nightly rate:   {locale.currency(rate, symbol = True, grouping = True)} {season}\n"
               f"Total nights:   {(departure - arrival).days}\n"
-              f"Total price:    ${(departure - arrival).days * rate}\n")
+              f"Total price:    {locale.currency((departure - arrival).days * rate, symbol = True, grouping = True)}\n")
 
         if input("Continue? (y/n): ").lower() != 'y':
             print("\nBye!")
