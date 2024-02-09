@@ -1,6 +1,9 @@
 import _locale
 from datetime import datetime
 import locale
+locale.setlocale(locale.LC_ALL, 'en_ca')
+# for loc in locale.locale_alias:
+#     print(loc)
 
 
 def main():
@@ -17,7 +20,6 @@ def main():
             season = ""
             rate = 85
 
-        locale.setlocale(locale.LC_ALL, 'en-ca')
         print(f"\n"
               f"Arrival date:   {arrival:%B %d, %Y}\n"
               f"Departure date: {departure:%B %d, %Y}\n"
