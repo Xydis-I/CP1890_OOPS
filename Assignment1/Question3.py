@@ -1,9 +1,15 @@
+"""
+Question 3: Customer Viewer
+Group Member: Christian Barrett
+"""
+
 from dataclasses import dataclass
 import csv
 
 fileName = "customers.csv"
 
 
+# Customer object with view functionality.
 @dataclass
 class Customer:
     id: int
@@ -16,6 +22,7 @@ class Customer:
     zip: str
 
     def view(self):
+        # Company dependant output formats.
         if self.company == '':
             print(f"\n"
                   f"{self.firstName} {self.lastName}\n"
@@ -29,6 +36,7 @@ class Customer:
                   f"{self.city}, {self.state} {self.zip}")
 
 
+# Function for parsing the csv data into Customer objects, returns them in a list container.
 def customer_parser(filename: str) -> list:
     customers = []
     with open(filename, newline='') as csvFile:
@@ -40,6 +48,7 @@ def customer_parser(filename: str) -> list:
     return customers
 
 
+# Function for checking if entered ID is a valid number.
 def get_id() -> int:
     while True:
         idNum = input("\nEnter customer ID: ")
@@ -53,6 +62,7 @@ def main():
 
     customers = customer_parser(fileName)
 
+    # Attempts to locate customer with entered ID.
     while True:
         userID = get_id()
         try:

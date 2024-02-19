@@ -1,5 +1,5 @@
 """
-Question 1: Rectangle Program
+Question 1: Rectangle Calculator
 Group Member: Matthew King
 """
 
