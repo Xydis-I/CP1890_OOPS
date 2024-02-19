@@ -1,20 +1,22 @@
 import random
 
-
+# creating class for individual cards
 class Cards:
+    #setting the suits and ranks as a string
     def __init__(self):
         self.suits: str
         self.ranks: str
 
-
+# making a class for the deck
 class Deck:
-
+    # setting the actual deck
     def __init__(self):
         self.deck = []
         self.suits = ['Clubs', 'Diamonds', 'Hearts', 'Spades']
         self.ranks = ['Ace', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King']
         self.__get_deck__()
-
+    # a definition for what the user will see and making sure
+    # they cant implement an incorrect amount wile giving a remainder
     def user(self):
         while True:
             print("I have shuffled a deck of 52 cards")
@@ -31,20 +33,20 @@ class Deck:
             print(f"\nYou have {remainder} cards left in the deck")
             print("bye!")
             break
-
+    # displays the greeting message 
     def greeting(self) -> str:
         print("Card Dealer".center(50, "-"))
         print("")
-
+    # shuffles the deck of cards
     def shuffle_cards(self):
         random.shuffle(self.deck)
-
+    # getting the cards or card from the deck
     def __get_deck__(self):
         for suit in self.suits:
             for rank in self.ranks:
                 card = f"{rank} of {suit}"
                 self.deck.append(card)
-
+    # returning a string from the deck to display what card you got 
     def __str__(self) -> str:
         return str(self.deck)
 
