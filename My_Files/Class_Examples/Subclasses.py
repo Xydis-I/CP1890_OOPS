@@ -1,0 +1,4 @@
+
+class CustomRequestError(Exception):
+    pass
+

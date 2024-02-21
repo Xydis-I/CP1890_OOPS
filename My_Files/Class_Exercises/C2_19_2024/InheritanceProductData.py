@@ -16,6 +16,9 @@ class Product:
     def get_discount_price(self) -> float:
         return self.price - self.get_discount_amount()
 
+    def __str__(self) -> str:
+        return self.name
+
 
 @dataclass
 class Movie(Product):
