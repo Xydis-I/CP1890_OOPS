@@ -75,6 +75,12 @@ class LinkedList:
             data = data.next
         data.next = node
 
+    def delete_at_head(self) -> None:
+        if self.head is not None:
+            self.head = self.head.next
+        else:
+            print('Head is empty.')
+
 
 linkedList = LinkedList()
 print(linkedList)
@@ -101,4 +107,7 @@ linkedList.insert_at_end(newEndNode)
 print(linkedList)
 
 linkedList.insert(newInsertNode, 5)
+print(linkedList)
+
+linkedList.delete_at_head()
 print(linkedList)
