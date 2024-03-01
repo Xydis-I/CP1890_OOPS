@@ -39,10 +39,10 @@ class Lisa(Player):
 class Roshambo:
     __wins: int = 0
     __loses: int = 0
-    player: Player = None
-    opponent: Player = None
+    __player: Player = None
+    __opponent: Player = None
 
-    choices = {'r': "rock", "p": "paper", "s": "scissors"}
+    __choices = {'r': "rock", "p": "paper", "s": "scissors"}
 
     @property
     def wins(self):
@@ -61,16 +61,16 @@ class Roshambo:
     def start_game(self):
         print("Roshambo\n")
         playerName = input("Enter your name: ")
-        player = Player(playerName)
+        __player = Player(playerName)
 
         while True:
             opponentName = input("\nWould you like to play Bart or Lisa? (b/l): ").lower()
             if opponentName == "b":
-                opponent = Bart()
+                __opponent = Bart()
                 break
 
             elif opponentName == "l":
-                opponent = Lisa()
+                __opponent = Lisa()
                 break
 
             else:
@@ -81,24 +81,24 @@ class Roshambo:
                 userInput = input("\nRock, paper, or scissors? (r/p/s): ").lower()
 
                 if ["r", "p", "s"].count(userInput) == 1:
-                    player.roshambo = self.choices[userInput]
+                    __player.roshambo = self.__choices[userInput]
                     break
 
                 else:
-                    print("Invalid input.")
+                    print("\nInvalid input.")
 
-            opponent.generate_roshambo()
+            __opponent.generate_roshambo()
 
-            print(f"\n{player.name}: {player.roshambo}")
-            print(f"{opponent.name}: {opponent.roshambo}")
+            print(f"\n{__player.name}: {__player.roshambo}")
+            print(f"{__opponent.name}: {__opponent.roshambo}")
 
-            winner = player.play(opponent)
+            winner = __player.play(__opponent)
 
             if winner is None:
                 print("Draw!")
 
             else:
-                if winner == player:
+                if winner == __player:
                     self.add_win()
                 else:
                     self.add_lose()
@@ -110,6 +110,10 @@ class Roshambo:
                 break
 
 
-if __name__ == "__main__":
+def main():
     game = Roshambo()
     game.start_game()
+
+
+if __name__ == "__main__":
+    main()
