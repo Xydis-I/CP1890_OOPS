@@ -57,7 +57,7 @@ clicked = tk.StringVar()
 clicked.set(options[0])
 
 drop = tk.OptionMenu(frame, clicked, *options)
-drop.config(width=19)
+drop.config(width=19, background="white", relief="groove")
 drop.grid(column=1, row=3)
 
 at_bats_label = ttk.Label(frame, text="At bats: ")
