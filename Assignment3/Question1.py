@@ -33,7 +33,7 @@ def main():
 
     with open(f"SupportingFiles/Question1/{csv_file}", newline='') as csvFile:
         file = csv.reader(csvFile, delimiter=',')
-        next(file)
+        next(file)  # Skips Header
         file = list(file)
         for line in file:
             query = f"""INSERT INTO Customer VALUES (NULL, "{line[0]}", "{line[1]}", "{line[2]}", "{line[3]}", "{line[4]}", "{line[5]}", "{line[6]}");"""

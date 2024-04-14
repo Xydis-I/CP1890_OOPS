@@ -2,7 +2,7 @@
 import Question3_Business as Bis
 
 
-def main():
+def main() -> None:
     print("Task List\n"
           "\n"
           "COMMAND MENU\n"
