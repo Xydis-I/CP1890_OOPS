@@ -7,7 +7,7 @@ conn = sqlite3.connect("SupportingFiles/Question5/Q5Database.sqlite")
 c = conn.cursor()
 
 window = tk.Tk()
-window.title("Right Triangle Calculator")
+window.title("Edit Sales Amount")
 window.geometry("330x190")
 window.resizable(width=False, height=False)
 
