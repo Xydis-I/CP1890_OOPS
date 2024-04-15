@@ -1,13 +1,9 @@
 # Question #5
-import datetime
-import csv
-import sqlite3
+import datetime, csv, sqlite3
+import locale as lc
 from dataclasses import dataclass
 
-
-DATE_FORMAT = "YYYY-MM-DD"
-
-
+lc.setlocale(lc.LC_ALL, "en_CA")
 conn = sqlite3.connect("SupportingFiles/Question5/Q5Database.sqlite")
 c = conn.cursor()
 
@@ -21,6 +17,11 @@ class Region:
 @dataclass
 class Regions:
     regions: list
+
+    def __init__(self):
+        self.regions = []
+        for region in c.execute("""SELECT * FROM Region"""):
+            self.add(Region(region[0], region[1]))
 
     def add(self, region):
         self.regions.append(region)
@@ -42,10 +43,28 @@ class DailySales:
 class SalesList:
     sales: list
 
+    def __init__(self):
+        self.sales = []
+
+    def add(self, sale):
+        self.sales.append(sale)
+
 
 class Db:
-    def import_csv(self):
-        fileName = input("File name: ")
+    @staticmethod
+    def get_all_sales() -> SalesList:
+        salesList = SalesList()
+        for sale in c.execute("""SELECT * FROM Sales ORDER BY DATE(salesDate)"""):
+            salesList.add(DailySales(sale[0], sale[1], sale[2], sale[3], int(sale[2].split('-')[1])//4+1))
+        return salesList
+
+    @staticmethod
+    def add(amount: float, date: str, region: str) -> None:
+        c.execute(f"""INSERT INTO Sales VALUES (NULL, {amount}, "{date}", "{region}");""")
+        conn.commit()
+
+    @staticmethod
+    def import_csv(fileName: str) -> None:
         with open(fileName) as csvFile:
             file = csv.reader(csvFile, delimiter=',')
             next(file)  # Skips Header
@@ -54,9 +73,45 @@ class Db:
             conn.commit()
 
 
+def get_float(prompt: str) -> float:
+    while True:
+        response = input(prompt)
+        if response.isnumeric():
+            return float(response)
+        print("Invalid input. Please try again.\n")
+
+
+def get_date(prompt: str) -> str:
+    while True:
+        response = input(prompt)
+        try:
+            datetime.date.fromisoformat(response)
+            return response
+        except ValueError:
+            print("Invalid input. Please try again.\n")
+
+
 def view():
+    total = 0
     print(f"{'Date':>9}{'Quarter':>18}{'Region':>14}{'Amount':>19}")
     print(60 * '-')
+    for n, data in enumerate(Db.get_all_sales().sales, 1):
+        print(f"{f'{n}.':<5}{data.salesDate:<15}{data.quarter:<15}{data.region:6}{lc.currency(data.amount, grouping=True):>19}")
+        total += int(data.amount)
+    print(60 * '-')
+    print(f"TOTAL:{lc.currency(total, grouping=True): >54}")
+
+
+def add():
+    amount = get_float("Amount: ")
+    date = get_date("Date(YYYY-MM-DD): ")
+    region = input("Region: ")
+    Db.add(amount, date, region)
+
+
+def import_file():
+    fileName = input("File name: ")
+    Db.import_csv(fileName)
 
 
 def menu():
@@ -79,9 +134,9 @@ def main():
         if command == "view":
             view()
         elif command == "add":
-            pass
+            add()
         elif command == "import":
-            pass
+            import_file()
         elif command == "menu":
             menu()
         elif command == "exit":
