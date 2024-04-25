@@ -16,7 +16,7 @@ def view() -> None:
     print(f"{'Name':12}{'Wins':>8}{'Losses':>10}{'Ties':>10}{'Games':>10}")
     print(50 * '-')
     for player in Db.select():
-        print(f"{player[1]:12}{player[2]:>8}{player[3]:>10}{player[4]:>10}{sum(player[2:4]):>10}")
+        print(f"{player[1]:12}{player[2]:>8}{player[3]:>10}{player[4]:>10}{sum(player[2:5]):>10}")
 
 
 def add() -> None:
